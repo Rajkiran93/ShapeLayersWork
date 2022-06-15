@@ -14,7 +14,6 @@
 		FCB123A72858B9F200C453CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCB123A62858B9F200C453CE /* Assets.xcassets */; };
 		FCB123AA2858B9F200C453CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCB123A82858B9F200C453CE /* LaunchScreen.storyboard */; };
 		FCB123B22858BC5F00C453CE /* AlphaPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB123B12858BC5F00C453CE /* AlphaPaths.swift */; };
-		FCB123B42858D4D600C453CE /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB123B32858D4D600C453CE /* DrawView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +26,6 @@
 		FCB123A92858B9F200C453CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FCB123AB2858B9F200C453CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCB123B12858BC5F00C453CE /* AlphaPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaPaths.swift; sourceTree = "<group>"; };
-		FCB123B32858D4D600C453CE /* DrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +62,6 @@
 				FCB1239F2858B9F100C453CE /* SceneDelegate.swift */,
 				FCB123A12858B9F100C453CE /* ViewController.swift */,
 				FCB123B12858BC5F00C453CE /* AlphaPaths.swift */,
-				FCB123B32858D4D600C453CE /* DrawView.swift */,
 				FCB123A32858B9F100C453CE /* Main.storyboard */,
 				FCB123A62858B9F200C453CE /* Assets.xcassets */,
 				FCB123A82858B9F200C453CE /* LaunchScreen.storyboard */,
@@ -145,7 +142,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCB123A22858B9F100C453CE /* ViewController.swift in Sources */,
-				FCB123B42858D4D600C453CE /* DrawView.swift in Sources */,
 				FCB123B22858BC5F00C453CE /* AlphaPaths.swift in Sources */,
 				FCB1239E2858B9F100C453CE /* AppDelegate.swift in Sources */,
 				FCB123A02858B9F100C453CE /* SceneDelegate.swift in Sources */,

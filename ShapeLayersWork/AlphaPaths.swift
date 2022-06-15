@@ -41,6 +41,56 @@ extension CGPath {
 		return arrPoints
 		
 	}
+
+	var pointsCount: Int {
+		
+		var count: Int = 0
+		
+		// applyWithBlock lets us examine each element of the CGPath, and decide what to do
+		self.applyWithBlock { element in
+			
+			switch element.pointee.type
+			{
+			case .moveToPoint, .addLineToPoint:
+				count += 1
+				
+			case .addQuadCurveToPoint:
+				count += 2
+				
+			case .addCurveToPoint:
+				count += 3
+				
+			default:
+				break
+			}
+		}
+		
+		// We are now done collecting our CGPoints and so we can return the result
+		return count
+		
+	}
+
+	var curvesCount: Int {
+		
+		var count: Int = 0
+		
+		// applyWithBlock lets us examine each element of the CGPath, and decide what to do
+		self.applyWithBlock { element in
+			
+			switch element.pointee.type
+			{
+			case .addQuadCurveToPoint, .addCurveToPoint:
+				count += 1
+				
+			default:
+				break
+			}
+		}
+		
+		// We are now done collecting our CGPoints and so we can return the result
+		return count
+		
+	}
 }
 
 // dictionary of CGPaths for characters " " - "~"
@@ -50,8 +100,10 @@ class AlphaPaths: NSObject {
 	var paths: [String : CGPath] = [:]
 	var charsArray: [String] = []
 	var lineHeight: CGFloat = 0
-	var minPoints: Int = 9999
+	var minPoints: Int = 999999
 	var maxPoints: Int = 0
+	var minCurves: Int = 999999
+	var maxCurves: Int = 0
 
 	private override init() {
 		// use 24-point Times New Roman font
@@ -61,7 +113,7 @@ class AlphaPaths: NSObject {
 		
 		lineHeight = font.lineHeight
 		
-		let unicodeScalarRange: ClosedRange<Unicode.Scalar> = " " ... "~"
+		let unicodeScalarRange: ClosedRange<Unicode.Scalar> = "!" ... "~"
 		let unicodeScalarValueRange: ClosedRange<UInt32> = unicodeScalarRange.lowerBound.value ... unicodeScalarRange.upperBound.value
 		let unicodeScalarArray: [Unicode.Scalar] = unicodeScalarValueRange.compactMap(Unicode.Scalar.init)
 		charsArray = unicodeScalarArray.map(String.init)
@@ -79,27 +131,16 @@ class AlphaPaths: NSObject {
 				var tr = CGAffineTransform(scaleX: 1.0, y: -1.0).translatedBy(x: 0, y: -(font.ascender + 0.0))
 				if let p = cgpath.copy(using: &tr) {
 					paths[c] = p
-					let np = p.points.count
+					var np = p.pointsCount
 					minPoints = min(minPoints, np)
 					maxPoints = max(maxPoints, np)
+					np = p.curvesCount
+					minCurves = min(minCurves, np)
+					maxCurves = max(maxCurves, np)
 				}
 			}
 		}
 
-//		for (c, g) in zip(unicodeScalarArray, glyphs) {
-//			if let cgpath = CTFontCreatePathForGlyph(font, g, nil) {
-//				var tr = CGAffineTransform(scaleX: 1.0, y: -1.0).translatedBy(x: 0, y: -(font.ascender + 0.0))
-//				if let p = cgpath.copy(using: &tr) {
-//					paths[String(c)] = p
-//					let np = p.points.count
-//					minPoints = min(minPoints, np)
-//					maxPoints = max(maxPoints, np)
-//				}
-//			}
-//		}
-
-		print("min:", minPoints, "max:", maxPoints)
-		
 	}
 
 }
