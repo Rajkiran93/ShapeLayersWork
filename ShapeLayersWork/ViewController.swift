@@ -365,25 +365,19 @@ class LoadingView: UIView {
 extension UIBezierPath{
 func updatePaths(points: [CGPoint]) {
     var points: [CGPoint] = points
-    
-    var prevPoint: CGPoint?
-    var i = 0
-    for point in points {
-        if let prevPoint = prevPoint {
-            if points.count > 4 {
+        if points.count > 4{
+            while points.count > 4 {
                 points[3] = CGPoint(x: (points[2].x + points[4].x)/2.0, y: (points[2].y + points[4].y)/2.0)
-                i = i + 1
+                self.move(to: points.first!)
                 self.addCurve(to: points[3], controlPoint1: points[1], controlPoint2: points[2])
                 points.removeFirst(3)
             }
-        }else{
-            self.move(to: point)
-        }
-        prevPoint = point
-    }
-
-    if let prevPoint = prevPoint {
-        self.addLine(to: prevPoint)
-    }
+            }else{
+                self.move(to: points[0])
+                self.addLine(to: points[0])
+    
+                self.move(to: points[1])
+                self.addLine(to: points[1])
+            }
 }
 }
